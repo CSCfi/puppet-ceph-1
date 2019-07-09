@@ -241,8 +241,6 @@ class ceph::profile::params (
   $rbd_default_features = undef,
 ) {
 
-  validate_legacy(Hash, 'validate_hash', $client_keys)
-
   if $authentication_type == 'cephx' and empty($client_keys) {
     fail("client_keys must be provided when using authentication_type = 'cephx'")
   }
