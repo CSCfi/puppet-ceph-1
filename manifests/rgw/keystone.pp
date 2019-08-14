@@ -105,7 +105,7 @@ define ceph::rgw::keystone (
   $user                             = undef,
 ) {
 
-  unless $name =~ /^radosgw|rgw\..+/ {
+  unless $name =~ /^(radosgw|rgw)\..+/ {
     fail("Define name must be started with 'radosgw.' or 'rgw.'")
   }
 
