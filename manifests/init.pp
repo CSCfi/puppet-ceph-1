@@ -140,7 +140,8 @@
 
 class ceph (
   $fsid,
-  $ensure                        = present,
+  # Override default ensure=installed until CCCP-3451 resolved
+  $ensure                        = '14.2.11',
   $authentication_type           = 'cephx',
   $keyring                       = undef,
   $osd_journal_size              = undef,

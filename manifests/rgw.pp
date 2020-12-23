@@ -139,7 +139,8 @@ define ceph::rgw (
   }
 
   package { $pkg_radosgw:
-    ensure => installed,
+    # Override default ensure=installed until CCCP-3451 resolved
+    ensure => '14.2.11',
     tag    => 'ceph',
   }
 
