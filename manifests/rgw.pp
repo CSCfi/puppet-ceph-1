@@ -139,7 +139,9 @@ define ceph::rgw (
   }
 
   package { $pkg_radosgw:
-    # Override default ensure=installed until CCCP-3451 resolved
+    # Override default ensure=installed until https://tracker.ceph.com/issues/48382 resolved. CCCP-3451
+    # This pinning is specific to "ceph-radosgw" package. It works in tandem with a similar change
+    # in CCCP where we pin the "ceph" package.
     ensure => '14.2.11',
     tag    => 'ceph',
   }
