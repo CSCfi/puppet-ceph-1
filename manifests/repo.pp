@@ -206,10 +206,12 @@ not on ${facts['os']['name']}, which can lead to packaging issues.")
           }
         }
 
-        # prefer ceph.com repos over EPEL
-        package { 'yum-plugin-priorities':
-          ensure => present,
-        }
+        if $el < '8' {
+          # prefer ceph.com repos over EPEL
+          package { 'yum-plugin-priorities':
+            ensure => present,
+          }
+	}
       }
 
       if $enable_epel {
