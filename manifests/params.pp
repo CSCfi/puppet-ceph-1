@@ -46,6 +46,7 @@ class ceph::params (
   $rgw_socket_path = '/tmp/radosgw.sock',
   $enable_sig      = false,
   $release         = 'nautilus',
+  $release_name    = undef,
 ) {
   $pkg_mds = 'ceph-mds'
 

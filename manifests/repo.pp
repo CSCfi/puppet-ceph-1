@@ -65,17 +65,18 @@
 #   Optional. Defaults to 'false'
 #
 class ceph::repo (
-  $ensure              = present,
-  String[1] $release   = $ceph::params::release,
-  $proxy               = undef,
-  $proxy_username      = undef,
-  $proxy_password      = undef,
-  Boolean $enable_epel = true,
-  Boolean $enable_sig  = $ceph::params::enable_sig,
-  Boolean $stream      = false,
-  $ceph_mirror         = undef,
+  $ensure                 = present,
+  String[1] $release      = $ceph::params::release,
+  String[1] $release_name = $ceph::params::release_name,
+  $proxy                  = undef,
+  $proxy_username         = undef,
+  $proxy_password         = undef,
+  Boolean $enable_epel    = true,
+  Boolean $enable_sig     = $ceph::params::enable_sig,
+  Boolean $stream         = false,
+  $ceph_mirror            = undef,
   # DEPRECATED PARAMETERS
-  Boolean $fastcgi     = false,
+  Boolean $fastcgi        = false,
 ) inherits ceph::params {
 
   if $fastcgi and !$ceph::params::fastcgi_available {
@@ -170,8 +171,8 @@ not on ${facts['os']['name']}, which can lead to packaging issues.")
 
         yumrepo { 'ext-ceph':
           ensure     => $ensure,
-          descr      => "External Ceph ${release}",
-          name       => "ext-ceph-${release}",
+          descr      => "External Ceph ${release_name}",
+          name       => "ext-ceph-${release_name}",
           baseurl    => "http://download.ceph.com/rpm-${release}/el${el}/\$basearch",
           gpgcheck   => '1',
           gpgkey     => 'https://download.ceph.com/keys/release.asc',
@@ -183,7 +184,7 @@ not on ${facts['os']['name']}, which can lead to packaging issues.")
         yumrepo { 'ext-ceph-noarch':
           ensure     => $ensure,
           descr      => 'External Ceph noarch',
-          name       => "ext-ceph-${release}-noarch",
+          name       => "ext-ceph-${release_name}-noarch",
           baseurl    => "http://download.ceph.com/rpm-${release}/el${el}/noarch",
           gpgcheck   => '1',
           gpgkey     => 'https://download.ceph.com/keys/release.asc',
